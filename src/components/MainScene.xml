@@ -2,5 +2,11 @@
 <component name="MainScene" extends="Scene">
     <children>
         <Label id="welcome" translation="[96, 54]"/>
+
+        <Button
+            id="actionButton"
+            translation="[96, 100]"
+            text="Increase!"
+        />
     </children>
 </component>
