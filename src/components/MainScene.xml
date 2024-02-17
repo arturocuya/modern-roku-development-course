@@ -8,5 +8,11 @@
             translation="[96, 100]"
             text="Increase!"
         />
+
+        <Button
+            id="actionButtonDecrease"
+            translation="[96, 200]"
+            text="Decrease!"
+        />
     </children>
 </component>

@@ -7,10 +7,48 @@ sub init()
     button = m.top.findNode("actionButton")
     button.setFocus(true)
 
+    decreaseButton = m.top.findNode("actionButtonDecrease")
+
     button.observeField("buttonSelected", "increase")
+    decreaseButton.observeField("buttonSelected", "decrease")
 end sub
 
 sub increase()
     m.counter += 1
     m.label.text = `The counter is: ${m.counter}`
 end sub
+
+sub decrease()
+    if (m.counter > 0)
+        m.counter -= 1
+    end if
+    m.label.text = `The counter is: ${m.counter}`
+end sub
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    ' First of all, key presses send two events: One when the key is pressed,
+    ' and another when it's released. We only want to respond to the press.
+    if (not press)
+        return false
+    end if
+
+    ' We need to get a reference to the buttons to check if they are focused.
+    ' Instead of calling `findNode()`, we could have also stored the reference
+    ' in the `m` scope during `init()`.
+    increaseButton = m.top.findNode("actionButton")
+    decreaseButton = m.top.findNode("actionButtonDecrease")
+
+    ' The `hasFocus()` method is implemented by the `roSGNode` component,
+    ' which is the final ancestor of all SceneGraph nodes.
+    if (key = "up" and decreaseButton.hasFocus())
+        increaseButton.setFocus(true)
+        return true
+    end if
+
+    if (key = "down" and increaseButton.hasFocus())
+        decreaseButton.setFocus(true)
+        return true
+    end if
+
+    return false
+end function
