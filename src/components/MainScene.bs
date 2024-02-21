@@ -1,28 +1,28 @@
 sub init()
-    m.label = m.top.findNode("welcome")
-    m.label.text = "Hello from create-roku-app"
+    m.playNowButton = m.top.findNode("playNowButton")
+    m.loadAnotherButton = m.top.findNode("loadAnotherButton")
 
-    m.counter = 0
+    m.playNowButton.observeField("buttonSelected", "playNow")
+    m.loadAnotherButton.observeField("buttonSelected", "loadAnother")
 
-    button = m.top.findNode("actionButton")
-    button.setFocus(true)
-
-    decreaseButton = m.top.findNode("actionButtonDecrease")
-
-    button.observeField("buttonSelected", "increase")
-    decreaseButton.observeField("buttonSelected", "decrease")
+    m.playNowButton.setFocus(true)
 end sub
 
-sub increase()
-    m.counter += 1
-    m.label.text = `The counter is: ${m.counter}`
+sub playNow()
+    ? "play now"
+    player = m.top.findNode("videoPlayer")
+    content = CreateObject("roSGNode", "ContentNode")
+    content.setFields({
+        title: "Aqua Teen Hunger Force",
+        url: "https://adultswim-vodlive.cdn.turner.com/live/aqua-teen/stream_de.m3u8",
+        streamFormat: "hls"
+    })
+    player.content = content
+    player.control = "play"
 end sub
 
-sub decrease()
-    if (m.counter > 0)
-        m.counter -= 1
-    end if
-    m.label.text = `The counter is: ${m.counter}`
+sub loadAnother()
+    ? "load another"
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -32,21 +32,15 @@ function onKeyEvent(key as string, press as boolean) as boolean
         return false
     end if
 
-    ' We need to get a reference to the buttons to check if they are focused.
-    ' Instead of calling `findNode()`, we could have also stored the reference
-    ' in the `m` scope during `init()`.
-    increaseButton = m.top.findNode("actionButton")
-    decreaseButton = m.top.findNode("actionButtonDecrease")
-
     ' The `hasFocus()` method is implemented by the `roSGNode` component,
     ' which is the final ancestor of all SceneGraph nodes.
-    if (key = "up" and decreaseButton.hasFocus())
-        increaseButton.setFocus(true)
+    if (key = "right" and m.playNowButton.hasFocus())
+        m.loadAnotherButton.setFocus(true)
         return true
     end if
 
-    if (key = "down" and increaseButton.hasFocus())
-        decreaseButton.setFocus(true)
+    if (key = "left" and m.loadAnotherButton.hasFocus())
+        m.playNowButton.setFocus(true)
         return true
     end if
 

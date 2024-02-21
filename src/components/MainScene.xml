@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="MainScene" extends="Scene">
     <children>
-        <Label id="welcome" translation="[96, 54]"/>
+        <Label translation="[96, 54]" text="Now Playing: Aqua Teen Hunger Force"/>
 
         <Button
-            id="actionButton"
+            id="playNowButton"
             translation="[96, 100]"
-            text="Increase!"
+            text="Play Now"
+            maxWidth="300"
+            minWidth="0"
+            iconUri=""
+            focusedIconUri=""
         />
 
         <Button
-            id="actionButtonDecrease"
-            translation="[96, 200]"
-            text="Decrease!"
+            id="loadAnotherButton"
+            translation="[340, 100]"
+            text="Load another"
+            maxWidth="350"
+            minWidth="0"
+            iconUri=""
+            focusedIconUri=""
+        />
+
+        <Video
+            id="videoPlayer"
+            translation="[96, 219]"
+            width="1360"
+            height="765"
         />
     </children>
 </component>
