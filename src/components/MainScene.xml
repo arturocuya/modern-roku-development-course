@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="MainScene" extends="Scene">
     <children>
-        <Label translation="[96, 54]" text="Now Playing: Aqua Teen Hunger Force"/>
+        <Label translation="[96, 54]" text="Now playing: Aqua Teen Hunger Force"/>
 
         <Button
-            id="playNowButton"
+            id="loadAnotherButton"
             translation="[96, 100]"
-            text="Play Now"
-            maxWidth="300"
+            text="Load another"
+            maxWidth="350"
             minWidth="0"
             iconUri=""
             focusedIconUri=""
         />
 
         <Button
-            id="loadAnotherButton"
-            translation="[340, 100]"
-            text="Load another"
-            maxWidth="350"
+            id="playNowButton"
+            translation="[400, 100]"
+            text="Play Now"
+            maxWidth="300"
             minWidth="0"
             iconUri=""
             focusedIconUri=""

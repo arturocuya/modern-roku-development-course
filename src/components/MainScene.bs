@@ -1,11 +1,11 @@
 sub init()
-    m.playNowButton = m.top.findNode("playNowButton")
     m.loadAnotherButton = m.top.findNode("loadAnotherButton")
+    m.playNowButton = m.top.findNode("playNowButton")
 
-    m.playNowButton.observeField("buttonSelected", "playNow")
     m.loadAnotherButton.observeField("buttonSelected", "loadAnother")
+    m.playNowButton.observeField("buttonSelected", "playNow")
 
-    m.playNowButton.setFocus(true)
+    m.loadAnotherButton.setFocus(true)
 end sub
 
 sub playNow()
@@ -34,13 +34,13 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
     ' The `hasFocus()` method is implemented by the `roSGNode` component,
     ' which is the final ancestor of all SceneGraph nodes.
-    if (key = "right" and m.playNowButton.hasFocus())
-        m.loadAnotherButton.setFocus(true)
+    if (key = "right" and m.loadAnotherButton.hasFocus())
+        m.playNowButton.setFocus(true)
         return true
     end if
 
-    if (key = "left" and m.loadAnotherButton.hasFocus())
-        m.playNowButton.setFocus(true)
+    if (key = "left" and m.playNowButton.hasFocus())
+        m.loadAnotherButton.setFocus(true)
         return true
     end if
 
