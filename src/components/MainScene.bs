@@ -6,19 +6,41 @@ sub init()
     m.playNowButton.observeField("buttonSelected", "playNow")
 
     m.loadAnotherButton.setFocus(true)
+
+    m.spinner = m.top.findNode("spinner")
+    ' `loadWidth` and `loadHeight` must be set before `uri` is set
+    ' to ensure that the image scales properly.
+    m.spinner.poster.setFields({
+        loadWidth: 40,
+        loadHeight: 40,
+        width: 40,
+        height: 40
+    })
+    m.spinner.uri = "pkg:/images/spinner-solid.png"
+    m.spinner.control = "start"
+
+    m.player = m.top.findNode("videoPlayer")
+    m.player.observeField("state", "onPlayerStateChange")
+end sub
+
+sub onPlayerStateChange()
+    if (m.player.state = "buffering")
+        m.spinner.visible = true
+    else
+        m.spinner.visible = false
+    end if
 end sub
 
 sub playNow()
     ? "play now"
-    player = m.top.findNode("videoPlayer")
     content = CreateObject("roSGNode", "ContentNode")
     content.setFields({
         title: "Aqua Teen Hunger Force",
         url: "https://adultswim-vodlive.cdn.turner.com/live/aqua-teen/stream_de.m3u8",
         streamFormat: "hls"
     })
-    player.content = content
-    player.control = "play"
+    m.player.content = content
+    m.player.control = "play"
 end sub
 
 sub loadAnother()
