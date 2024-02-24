@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="MainScene" extends="Scene">
     <children>
-        <Label translation="[96, 54]" text="Now playing: Aqua Teen Hunger Force"/>
+        <Label id="title" translation="[96, 54]" />
 
         <Button
             id="loadAnotherButton"

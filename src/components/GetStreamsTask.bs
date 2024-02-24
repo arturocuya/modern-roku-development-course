@@ -4,13 +4,27 @@ sub init()
     m.top.functionName = "execute"
 end sub
 
+' `const` statements are a feature from BrighterScript
+const STREAMS_URL = "https://raw.githubusercontent.com/arturocuya/modern-roku-development-course/master/data/streams.json"
+
 sub execute()
-    r = rokurequests_Requests().get("https://api.github.com/events")
-    ? "status code", r.statusCode
+    ' Installing a library with `ropm` appends the name of the library to
+    ' its methods, to avoid name collisions with other libraries.
+    response =  rokurequests_Requests().get(STREAMS_URL)
+
+    if (response.statuscode <> 200 or response.json = invalid)
+        ? "Error fetching streams"
+        return
+    end if
+
+    ' Randomly select one of the streams
+    selectedStream = response.json.streams[Rnd(response.json.streams.count()) - 1]
+
+    ' Create the content node as usual
     content = CreateObject("roSGNode", "ContentNode")
     content.setFields({
-        title: "Aqua Teen Hunger Force",
-        url: "https://adultswim-vodlive.cdn.turner.com/live/aqua-teen/stream_de.m3u8",
+        title: selectedStream.title,
+        url: selectedStream.url,
         streamFormat: "hls"
     })
 

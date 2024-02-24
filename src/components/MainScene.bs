@@ -1,4 +1,6 @@
 sub init()
+    m.screenTitle = m.top.findNode("title")
+
     m.loadAnotherButton = m.top.findNode("loadAnotherButton")
     m.playNowButton = m.top.findNode("playNowButton")
 
@@ -23,6 +25,8 @@ sub init()
     m.player.observeField("state", "onPlayerStateChange")
 
     m.task = CreateObject("roSGNode", "GetStreamsTask")
+
+    loadAnother()
 end sub
 
 sub onPlayerStateChange()
@@ -31,9 +35,21 @@ sub onPlayerStateChange()
     else
         m.spinner.visible = false
     end if
+
+    if (m.player.state = "error")
+        m.screenTitle.text += " (Error loading stream. Please load another)"
+    end if
 end sub
 
 sub playNow()
+    if (m.nextContent <> invalid)
+        m.player.content = m.nextContent
+        m.player.control = "play"
+        m.screenTitle.text = "Now Playing: " + m.nextContent.title
+    end if
+end sub
+
+sub loadAnother()
     m.task.observeField("result", "onGetStreamsTaskResult")
     m.task.control = "run"
 end sub
@@ -52,12 +68,8 @@ sub onGetStreamsTaskResult(event)
     ' take up memory and can cause memory leaks.
     m.task.unobserveField("result")
 
-    m.player.content = content
-    m.player.control = "play"
-end sub
-
-sub loadAnother()
-    ? "load another"
+    m.nextContent = content
+    m.screenTitle.text = "In queue: " + m.nextContent.title
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
