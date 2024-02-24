@@ -1,0 +1,5 @@
+<component name="GetStreamsTask" extends="Task">
+    <interface>
+        <field id="result" type="node" />
+    </interface>
+</component>

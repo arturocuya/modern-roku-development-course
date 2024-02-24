@@ -21,6 +21,8 @@ sub init()
 
     m.player = m.top.findNode("videoPlayer")
     m.player.observeField("state", "onPlayerStateChange")
+
+    m.task = CreateObject("roSGNode", "GetStreamsTask")
 end sub
 
 sub onPlayerStateChange()
@@ -32,13 +34,24 @@ sub onPlayerStateChange()
 end sub
 
 sub playNow()
-    ? "play now"
-    content = CreateObject("roSGNode", "ContentNode")
-    content.setFields({
-        title: "Aqua Teen Hunger Force",
-        url: "https://adultswim-vodlive.cdn.turner.com/live/aqua-teen/stream_de.m3u8",
-        streamFormat: "hls"
-    })
+    m.task.observeField("result", "onGetStreamsTaskResult")
+    m.task.control = "run"
+end sub
+
+sub onGetStreamsTaskResult(event)
+    ' Remember that event.getData() returns
+    ' the value of the observed field (in this case, "result")
+    content = event.getData()
+
+    ' Do nothing if the result is still empty
+    if (content = invalid)
+        return
+    end if
+
+    ' It is always a good idea to cleanup observers since they
+    ' take up memory and can cause memory leaks.
+    m.task.unobserveField("result")
+
     m.player.content = content
     m.player.control = "play"
 end sub

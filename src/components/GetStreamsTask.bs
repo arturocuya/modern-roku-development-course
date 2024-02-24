@@ -1,0 +1,14 @@
+sub init()
+    m.top.functionName = "execute"
+end sub
+
+sub execute()
+    content = CreateObject("roSGNode", "ContentNode")
+    content.setFields({
+        title: "Aqua Teen Hunger Force",
+        url: "https://adultswim-vodlive.cdn.turner.com/live/aqua-teen/stream_de.m3u8",
+        streamFormat: "hls"
+    })
+
+    m.top.result = content
+end sub
