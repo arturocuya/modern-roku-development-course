@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  roku-requests:
+    specifier: ^1.2.0
+    version: 1.2.0
+
 devDependencies:
   '@rokucommunity/bslint':
     specifier: ^0.8.17
@@ -964,6 +969,10 @@ packages:
       temp-dir: 2.0.0
       xml2js: 0.5.0
     dev: true
+
+  /roku-requests@1.2.0:
+    resolution: {integrity: sha512-X6XakmJwxT8H+YNvjZOwH+k8rmYpD5o47k37WyZJ/brrSD6cw9xbNdxO203nz6jpso4maQJGwSJvLGZpzSQ0AA==}
+    dev: false
 
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}

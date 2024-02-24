@@ -1,8 +1,12 @@
+import "pkg:/source/roku_modules/rokurequests/Requests.brs"
+
 sub init()
     m.top.functionName = "execute"
 end sub
 
 sub execute()
+    r = rokurequests_Requests().get("https://api.github.com/events")
+    ? "status code", r.statusCode
     content = CreateObject("roSGNode", "ContentNode")
     content.setFields({
         title: "Aqua Teen Hunger Force",
