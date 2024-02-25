@@ -27,6 +27,8 @@ sub init()
     m.task = CreateObject("roSGNode", "GetStreamsTask")
 
     loadAnother()
+
+    m.top.signalBeacon("AppLaunchComplete")
 end sub
 
 sub onPlayerStateChange()

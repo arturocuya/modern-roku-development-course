@@ -10,7 +10,8 @@
             "rootDir": "${workspaceFolder}/dist/build",
             "preLaunchTask": "build",
             "name": "Launch Modern Introduction to Roku Development (dev)",
-            "injectRdbOnDeviceComponent": true
+            "injectRdbOnDeviceComponent": true,
+            "rendezvousTracking": false
         },
         {
             "type": "brightscript",
@@ -20,6 +21,7 @@
             "stopDebuggerOnAppExit": false,
             "rootDir": "${workspaceFolder}/dist/build",
             "preLaunchTask": "build-prod",
+            "rendezvousTracking": false,
             "name": "Launch Modern Introduction to Roku Development (prod)"
         }
     ]
